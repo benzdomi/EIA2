@@ -1,9 +1,16 @@
+/*
+Aufgabe: Aufgabe 1
+Name: Dominik Benz
+Matrikel: 256152
+Datum: 14.10.2017
+Hiermit versichere ich, dass ich diesen
+Code selbst geschrieben habe. Er wurde
+nicht kopiert und auch nicht diktiert.
+*/
 window.addEventListener("load", main);
 function main() {
     let canvas = document.getElementsByTagName("canvas")[0];
-    console.log(canvas);
     let crc2 = canvas.getContext("2d");
-    console.log(crc2);
     crc2.fillStyle = "#1e8cfd";
     crc2.fillRect(0, 0, 800, 600);
     //Berge
