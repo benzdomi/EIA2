@@ -7,15 +7,15 @@ Hiermit versichere ich, dass ich diesen
 Code selbst geschrieben habe. Er wurde
 nicht kopiert und auch nicht diktiert.
 */
-namespace Aufgabe1{
+namespace Aufgabe2{
 
 window.addEventListener("load", main);
 
-    let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
-    let crc2: CanvasRenderingContext2D = canvas.getContext("2d");
+    
 
 function main(): void {
-
+    var canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
+    var crc2: CanvasRenderingContext2D = canvas.getContext("2d");
 
     crc2.fillStyle = "#1e8cfd";
     crc2.fillRect(0, 0, 800, 600);
@@ -119,46 +119,80 @@ function main(): void {
     
     
 //Baum
-    crc2.fillStyle = "#603e1b";
-    crc2.fillRect(58, 480, 28, 27);
-    crc2.beginPath();
-    crc2.moveTo(15, 485);
-    crc2.lineTo(70, 390);
-    crc2.lineTo(125, 485);
-    crc2.closePath();
-    crc2.fillStyle = "#3a5d25";
-    crc2.fill();
-    
-    crc2.fillStyle = "#603e1b";
-    crc2.fillRect(209, 485, 28, 40);
-    crc2.beginPath();
-    crc2.moveTo(170, 485);
-    crc2.lineTo(223, 390);
-    crc2.lineTo(275, 485);
-    crc2.closePath();
-    crc2.fillStyle = "#3a5d25";
-    crc2.fill();
-    
-    crc2.fillStyle = "#603e1b";
-    crc2.fillRect(28, 550, 28, 27);
-    crc2.beginPath();
-    crc2.moveTo(0, 525);
-    crc2.lineTo(50, 450);
-    crc2.lineTo(100, 555);
-    crc2.lineTo(0, 555);
-    crc2.closePath();
-    crc2.fillStyle = "#3a5d25";
-    crc2.fill();
-    
-    crc2.fillStyle = "#603e1b";
-    crc2.fillRect(143, 550, 28, 27);
-    crc2.beginPath();
-    crc2.moveTo(100, 555);
-    crc2.lineTo(160, 455);
-    crc2.lineTo(215, 558);
-    crc2.closePath();
-    crc2.fillStyle = "#3a5d25";
-    crc2.fill();
+//    crc2.fillStyle = "#603e1b";
+//    crc2.fillRect(58, 480, 28, 27);
+//    crc2.beginPath();
+//    crc2.moveTo(15, 485);
+//    crc2.lineTo(70, 390);
+//    crc2.lineTo(125, 485);
+//    crc2.closePath();
+//    crc2.fillStyle = "#3a5d25";
+//    crc2.fill();
+//    
+//    crc2.fillStyle = "#603e1b";
+//    crc2.fillRect(209, 485, 28, 40);
+//    crc2.beginPath();
+//    crc2.moveTo(170, 485);
+//    crc2.lineTo(223, 390);
+//    crc2.lineTo(275, 485);
+//    crc2.closePath();
+//    crc2.fillStyle = "#3a5d25";
+//    crc2.fill();
+//    
+//    crc2.fillStyle = "#603e1b";
+//    crc2.fillRect(28, 550, 28, 27);
+//    crc2.beginPath();
+//    crc2.moveTo(0, 525);
+//    crc2.lineTo(50, 450);
+//    crc2.lineTo(100, 555);
+//    crc2.lineTo(0, 555);
+//    crc2.closePath();
+//    crc2.fillStyle = "#3a5d25";
+//    crc2.fill();
+//    
+//    crc2.fillStyle = "#603e1b";
+//    crc2.fillRect(143, 550, 28, 27);
+//    crc2.beginPath();
+//    crc2.moveTo(100, 555);
+//    crc2.lineTo(160, 455);
+//    crc2.lineTo(215, 558);
+//    crc2.closePath();
+//    crc2.fillStyle = "#3a5d25";
+//    crc2.fill();
 
+    for(let i : number = 0; i<4; i++){
+        drawTree(Math.random()*50+i*200,Math.random()*100+400)
+        }
+    
+    for(let i : number = 0; i<1000; i++){
+        drawSnow(Math.random()*800+0,Math.random()*600+0)
+        }
+    
 }
+    
+    function drawTree (x:number, y:number) : void {
+        var canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
+    var crc2: CanvasRenderingContext2D = canvas.getContext("2d");
+        
+    crc2.fillStyle = "#603e1b";
+    crc2.fillRect(x, y, 28, 27);
+    crc2.beginPath();
+    crc2.moveTo(x-43, y+5);
+    crc2.lineTo(x+17, y-95);
+    crc2.lineTo(x+72, y+8);
+    crc2.closePath();
+    crc2.fillStyle = "#3a5d25";
+    crc2.fill();
+    }
+    
+    function drawSnow (x:number, y:number) : void {
+        var canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
+    var crc2: CanvasRenderingContext2D = canvas.getContext("2d");
+        
+        crc2.beginPath();
+    crc2.arc(x, y, 2, 0, 2 * Math.PI);
+    crc2.fillStyle = "#ffffff";
+    crc2.fill();
+        
+        }
     }
