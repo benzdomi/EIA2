@@ -32,43 +32,46 @@ var Aufgabe2;
         crc2.closePath();
         crc2.fill();
         //Wolken
-        crc2.beginPath();
-        crc2.arc(75, 115, 30, 0, 2 * Math.PI);
-        crc2.fillStyle = "#ffffff";
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(100, 90, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(125, 115, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(280, 90, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(305, 65, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(330, 90, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(485, 115, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(510, 90, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(535, 115, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(680, 90, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(705, 65, 30, 0, 2 * Math.PI);
-        crc2.fill();
-        crc2.beginPath();
-        crc2.arc(730, 90, 30, 0, 2 * Math.PI);
-        crc2.fill();
+        //    crc2.beginPath();
+        //    crc2.arc(75, 115, 30, 0, 2 * Math.PI);
+        //    crc2.fillStyle = "#ffffff";
+        //    crc2.fill();
+        //    crc2.beginPath();
+        //    crc2.arc(100, 90, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    crc2.beginPath();
+        //    crc2.arc(125, 115, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    
+        //    crc2.beginPath();
+        //    crc2.arc(280, 90, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    crc2.beginPath();
+        //    crc2.arc(305, 65, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    crc2.beginPath();
+        //    crc2.arc(330, 90, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    
+        //    crc2.beginPath();
+        //    crc2.arc(485, 115, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    crc2.beginPath();
+        //    crc2.arc(510, 90, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    crc2.beginPath();
+        //    crc2.arc(535, 115, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    
+        //    crc2.beginPath();
+        //    crc2.arc(680, 90, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    crc2.beginPath();
+        //    crc2.arc(705, 65, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
+        //    crc2.beginPath();
+        //    crc2.arc(730, 90, 30, 0, 2 * Math.PI);
+        //    crc2.fill();
         //Skipiste
         crc2.beginPath();
         crc2.moveTo(0, 165);
@@ -147,6 +150,9 @@ var Aufgabe2;
         for (let i = 0; i < 1000; i++) {
             drawSnow(Math.random() * 800 + 0, Math.random() * 600 + 0);
         }
+        for (let i = 0; i < 4; i++) {
+            drawClouds(Math.random() * 50 + i * 200, Math.random() * 150 + 0);
+        }
     }
     function drawTree(x, y) {
         var canvas = document.getElementsByTagName("canvas")[0];
@@ -167,6 +173,20 @@ var Aufgabe2;
         crc2.beginPath();
         crc2.arc(x, y, 2, 0, 2 * Math.PI);
         crc2.fillStyle = "#ffffff";
+        crc2.fill();
+    }
+    function drawClouds(x, y) {
+        var canvas = document.getElementsByTagName("canvas")[0];
+        var crc2 = canvas.getContext("2d");
+        crc2.beginPath();
+        crc2.arc(x, y + 25, 30, 0, 2 * Math.PI);
+        crc2.fillStyle = "#000000";
+        crc2.fill();
+        crc2.beginPath();
+        crc2.arc(x + 25, y, 30, 0, 2 * Math.PI);
+        crc2.fill();
+        crc2.beginPath();
+        crc2.arc(x + 50, y + 25, 30, 0, 2 * Math.PI);
         crc2.fill();
     }
 })(Aufgabe2 || (Aufgabe2 = {}));
