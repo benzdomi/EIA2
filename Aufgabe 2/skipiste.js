@@ -1,8 +1,8 @@
 /*
-Aufgabe: Aufgabe 1
+Aufgabe: Aufgabe 2
 Name: Dominik Benz
 Matrikel: 256152
-Datum: 14.10.2017
+Datum: 20.10.2017
 Hiermit versichere ich, dass ich diesen
 Code selbst geschrieben habe. Er wurde
 nicht kopiert und auch nicht diktiert.
@@ -63,7 +63,7 @@ var Aufgabe2;
         //    crc2.arc(535, 115, 30, 0, 2 * Math.PI);
         //    crc2.fill();
         //    
-        //    crc2.beginPath();
+        //    crcginPath();
         //    crc2.arc(680, 90, 30, 0, 2 * Math.PI);
         //    crc2.fill();
         //    crc2.beginPath();
