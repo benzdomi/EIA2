@@ -206,7 +206,7 @@ function main(): void {
         
      crc2.beginPath();
     crc2.arc(x, y+25, 30, 0, 2 * Math.PI);
-    crc2.fillStyle = "#000000";
+    crc2.fillStyle = "#ffffff";
     crc2.fill();
     crc2.beginPath();
     crc2.arc(x+25, y, 30, 0, 2 * Math.PI);
