@@ -8,15 +8,19 @@ Code selbst geschrieben habe. Er wurde
 nicht kopiert und auch nicht diktiert.
 */
 namespace Aufgabe2 {
-
+    
+    var canvas: HTMLCanvasElement;
+    var crc2: CanvasRenderingContext2D;
+    
     window.addEventListener("load", main);
+    
 
 
 
     function main(): void {
-        var canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
-        var crc2: CanvasRenderingContext2D = canvas.getContext("2d");
-
+        canvas = <HTMLCanvasElement>document.getElementsByTagName("canvas")[0];
+        crc2 = canvas.getContext("2d");
+        
         crc2.fillStyle = "#1e8cfd";
         crc2.fillRect(0, 0, 800, 600);
 
@@ -175,8 +179,7 @@ namespace Aufgabe2 {
     }
 
     function drawTree(x: number, y: number): void {
-        var canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
-        var crc2: CanvasRenderingContext2D = canvas.getContext("2d");
+
 
         crc2.fillStyle = "#603e1b";
         crc2.fillRect(x, y, 28, 27);
@@ -190,8 +193,7 @@ namespace Aufgabe2 {
     }
 
     function drawSnow(x: number, y: number): void {
-        var canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
-        var crc2: CanvasRenderingContext2D = canvas.getContext("2d");
+
 
         crc2.beginPath();
         crc2.arc(x, y, 2, 0, 2 * Math.PI);
@@ -201,8 +203,7 @@ namespace Aufgabe2 {
     }
 
     function drawClouds(x: number, y: number): void {
-        var canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
-        var crc2: CanvasRenderingContext2D = canvas.getContext("2d");
+
 
         crc2.beginPath();
         crc2.arc(x, y + 25, 30, 0, 2 * Math.PI);

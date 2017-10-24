@@ -9,10 +9,12 @@ nicht kopiert und auch nicht diktiert.
 */
 var Aufgabe2;
 (function (Aufgabe2) {
+    var canvas;
+    var crc2;
     window.addEventListener("load", main);
     function main() {
-        var canvas = document.getElementsByTagName("canvas")[0];
-        var crc2 = canvas.getContext("2d");
+        canvas = document.getElementsByTagName("canvas")[0];
+        crc2 = canvas.getContext("2d");
         crc2.fillStyle = "#1e8cfd";
         crc2.fillRect(0, 0, 800, 600);
         //Berge
@@ -155,8 +157,6 @@ var Aufgabe2;
         }
     }
     function drawTree(x, y) {
-        var canvas = document.getElementsByTagName("canvas")[0];
-        var crc2 = canvas.getContext("2d");
         crc2.fillStyle = "#603e1b";
         crc2.fillRect(x, y, 28, 27);
         crc2.beginPath();
@@ -168,16 +168,12 @@ var Aufgabe2;
         crc2.fill();
     }
     function drawSnow(x, y) {
-        var canvas = document.getElementsByTagName("canvas")[0];
-        var crc2 = canvas.getContext("2d");
         crc2.beginPath();
         crc2.arc(x, y, 2, 0, 2 * Math.PI);
         crc2.fillStyle = "#ffffff";
         crc2.fill();
     }
     function drawClouds(x, y) {
-        var canvas = document.getElementsByTagName("canvas")[0];
-        var crc2 = canvas.getContext("2d");
         crc2.beginPath();
         crc2.arc(x, y + 25, 30, 0, 2 * Math.PI);
         crc2.fillStyle = "#ffffff";
