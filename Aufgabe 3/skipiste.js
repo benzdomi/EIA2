@@ -151,7 +151,7 @@ var Aufgabe3;
             if (cloudX[i] >= 800) {
                 cloudX[i] = 0;
             }
-            cloudX[i] += Math.random() * 0.25 - 0; //Math.random() * 4 - 0; // hier experimentieren um
+            cloudX[i] += Math.random() * 0.25 - 0;
             cloudY[i] += 0; // andere Bewegungsmuster zu finden
             drawClouds(cloudX[i], cloudY[i]);
         }
