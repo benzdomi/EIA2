@@ -145,10 +145,15 @@ namespace Aufgabe3 {
             }
     
     function skifahrer(x: number, y: number) :void{
-        crc2.beginPath();
-        crc2.arc(x, y, 10, 0, 2 * Math.PI);
         crc2.fillStyle = "#000000";
+        crc2.fillRect(x, y, 5, -20);
+        crc2.beginPath();
+        crc2.arc(x + 2.5, y - 20, 7, 0, 2 * Math.PI);
         crc2.fill();
+        crc2.beginPath();
+        crc2.moveTo(x - 10, y - 5);
+        crc2.lineTo(x + 15, y + 4);
+        crc2.stroke();
         }
     
     
