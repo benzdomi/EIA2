@@ -86,7 +86,7 @@ namespace Aufgabe3 {
         crc2.stroke();
 
         for (let i: number = 0; i < 4; i++) {
-            drawTree(Math.random() * 50 + i * 100, Math.random() * 100 + 400)
+            drawTree(Math.random() * 50 + i * 100, Math.random() * 100 + 475)
         }
 
         for (let i: number = 0; i < 4; i++) {

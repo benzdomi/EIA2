@@ -72,7 +72,7 @@ var Aufgabe3;
         crc2.closePath();
         crc2.stroke();
         for (let i = 0; i < 4; i++) {
-            drawTree(Math.random() * 50 + i * 100, Math.random() * 100 + 400);
+            drawTree(Math.random() * 50 + i * 100, Math.random() * 100 + 475);
         }
         for (let i = 0; i < 4; i++) {
             cloudX[i] = Math.random() * 50 + i * 200;
