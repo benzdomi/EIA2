@@ -82,11 +82,12 @@ var Aufgabe3;
             arrayX[i] = Math.random() * 800 + 0;
             arrayY[i] = Math.random() * 600 + 0;
         }
-        for (let i = 0; i < 1; i++) {
-            skiX[i] = 10;
-            skiY[i] = 175;
+        for (let i = 0; i < 3; i++) {
+            skiX[i] = Math.random() * 50 + 10;
+            skiY[i] = Math.random() * 200 + 175;
         }
         image = crc2.getImageData(0, 0, 800, 600);
+        animate();
     }
     function drawTree(x, y) {
         crc2.fillStyle = "#603e1b";
@@ -157,6 +158,5 @@ var Aufgabe3;
         }
         window.setTimeout(animate, 20);
     }
-    window.setTimeout(animate, 20);
 })(Aufgabe3 || (Aufgabe3 = {}));
 //# sourceMappingURL=skipiste.js.map
