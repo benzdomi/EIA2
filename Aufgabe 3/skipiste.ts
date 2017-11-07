@@ -164,9 +164,9 @@ namespace Aufgabe3 {
         crc2.clearRect(0, 0, 800, 600);
         crc2.putImageData(image, 0,0);
         for (let i: number = 0; i < skiX.length; i++) {
-             if(skiX[i] >= 800){
-                skiY[i] = 175;
-                skiX[i]= 10;
+             if(skiX[i] >= 800 || skiY[i] >= 600){
+                skiX[i] = Math.random() * 50 + 10;
+                skiY[i] = Math.random() * 200 + 175;
                 }
              
             skiX[i] +=  1.75;
