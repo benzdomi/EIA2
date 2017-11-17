@@ -12,12 +12,15 @@ namespace Aufgabe4 {
     interface skier {
         x: number;
         y: number;
+        dx: number;
+        dy: number;
         color: string;
 }
     
     interface snow {
         x: number,
-        y: number
+        y: number,
+        dy: number
         }
     
     var canvas: HTMLCanvasElement;
@@ -106,6 +109,7 @@ namespace Aufgabe4 {
         for (let i: number = 0; i < 800; i++) {
             snowAnimate[i] = {
                 x : Math.random() * 800 + 0,
+                dy: 1,
                 y : Math.random() * 600 + 0};
         }
         
@@ -113,6 +117,8 @@ namespace Aufgabe4 {
             skierAnimate[i] = {
                 x: Math.random() * 100 + 10,
                 y: Math.random() * 200 + 195,
+                dx: 1.75,
+                dy: 0.75,
                 color: "hsl(" + Math.random() * 360 + ", 100%, 50%)"};
         }
         
@@ -135,14 +141,15 @@ namespace Aufgabe4 {
         crc2.fill();
     }
 
-    function drawSnow(x: number, y: number): void {
-
+    function drawSnow(_snow : snow): void {
+            
+            
+            _snow.y += _snow.dy; 
 
         crc2.beginPath();
-        crc2.arc(x, y, 2, 0, 2 * Math.PI);
+        crc2.arc(_snow.x, _snow.y, 2, 0, 2 * Math.PI);
         crc2.fillStyle = "#ffffff";
         crc2.fill();
-
     }
 
     function drawClouds(x: number, y: number): void {
@@ -158,17 +165,20 @@ namespace Aufgabe4 {
         crc2.fill();
             }
     
-    function skifahrer(x: number, y: number, color: string) :void{
-        crc2.fillStyle = color;
-        crc2.fillRect(x, y, 5, -20);
+    function skifahrer(_skier : skier) :void{
+        _skier.x += _skier.dx
+        _skier.y += _skier.dy
+            
+        crc2.fillStyle = _skier.color;
+        crc2.fillRect(_skier.x, _skier.y, 5, -20);
         crc2.beginPath();
-        crc2.arc(x + 2.5, y - 20, 7, 0, 2 * Math.PI);
+        crc2.arc(_skier.x + 2.5, _skier.y - 20, 7, 0, 2 * Math.PI);
         crc2.fill();
         crc2.beginPath();
-        crc2.moveTo(x - 10, y - 5);
-        crc2.lineTo(x + 15, y + 4);
+        crc2.moveTo(_skier.x - 10, _skier.y - 5);
+        crc2.lineTo(_skier.x + 15, _skier.y + 4);
         crc2.stroke();
-        }
+            }
     
     
     function animate(): void {
@@ -181,21 +191,19 @@ namespace Aufgabe4 {
                 skierAnimate[i].y = Math.random() * 200 + 175;
                  skierAnimate[i].color = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
                 }
-             
-            skierAnimate[i].x +=  1.75;
-            skierAnimate[i].y += 0.75; 
-            skifahrer(skierAnimate[i].x, skierAnimate[i].y, skierAnimate[i].color);
-            
+          
+            skifahrer(skierAnimate[i]);
         } 
         
-        for (let i: number = 0; i < snowAnimate.length; i++) {
-            if(snowAnimate[i].y >= 600){
-                snowAnimate[i].y = 0;
+            for (let i: number = 0; i < snowAnimate.length; i++) {
+             if(snowAnimate[i].y >= 600){
+                snowAnimate[i].y = Math.random() * 200 + 175;
                 }
-            snowAnimate[i].y += 1; // andere Bewegungsmuster zu finden
+          
+            drawSnow(snowAnimate[i]);
+        } 
             
-            drawSnow(snowAnimate[i].x, snowAnimate[i].y);
-            }
+       
             
          for (let i: number = 0; i < cloudX.length; i++) {
              if(cloudX[i] >= 800){
@@ -205,11 +213,12 @@ namespace Aufgabe4 {
             cloudX[i] += Math.random() * 0.25 - 0;
             cloudY[i] += 0 // andere Bewegungsmuster zu finden
             drawClouds(cloudX[i], cloudY[i]);
+             
         }    
         
         
-        
-    window.setTimeout(animate, 20);
+        window.setTimeout(animate, 20);
+    
     }
     
     

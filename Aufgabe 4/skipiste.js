@@ -79,12 +79,15 @@ var Aufgabe4;
         for (let i = 0; i < 800; i++) {
             snowAnimate[i] = {
                 x: Math.random() * 800 + 0,
+                dy: 1,
                 y: Math.random() * 600 + 0 };
         }
         for (let i = 0; i < 10; i++) {
             skierAnimate[i] = {
                 x: Math.random() * 100 + 10,
                 y: Math.random() * 200 + 195,
+                dx: 1.75,
+                dy: 0.75,
                 color: "hsl(" + Math.random() * 360 + ", 100%, 50%)" };
         }
         image = crc2.getImageData(0, 0, 800, 600);
@@ -101,9 +104,10 @@ var Aufgabe4;
         crc2.fillStyle = "#3a5d25";
         crc2.fill();
     }
-    function drawSnow(x, y) {
+    function drawSnow(_snow) {
+        _snow.y += _snow.dy;
         crc2.beginPath();
-        crc2.arc(x, y, 2, 0, 2 * Math.PI);
+        crc2.arc(_snow.x, _snow.y, 2, 0, 2 * Math.PI);
         crc2.fillStyle = "#ffffff";
         crc2.fill();
     }
@@ -119,15 +123,17 @@ var Aufgabe4;
         crc2.arc(x + 50, y + 25, 30, 0, 2 * Math.PI);
         crc2.fill();
     }
-    function skifahrer(x, y, color) {
-        crc2.fillStyle = color;
-        crc2.fillRect(x, y, 5, -20);
+    function skifahrer(_skier) {
+        _skier.x += _skier.dx;
+        _skier.y += _skier.dy;
+        crc2.fillStyle = _skier.color;
+        crc2.fillRect(_skier.x, _skier.y, 5, -20);
         crc2.beginPath();
-        crc2.arc(x + 2.5, y - 20, 7, 0, 2 * Math.PI);
+        crc2.arc(_skier.x + 2.5, _skier.y - 20, 7, 0, 2 * Math.PI);
         crc2.fill();
         crc2.beginPath();
-        crc2.moveTo(x - 10, y - 5);
-        crc2.lineTo(x + 15, y + 4);
+        crc2.moveTo(_skier.x - 10, _skier.y - 5);
+        crc2.lineTo(_skier.x + 15, _skier.y + 4);
         crc2.stroke();
     }
     function animate() {
@@ -139,16 +145,13 @@ var Aufgabe4;
                 skierAnimate[i].y = Math.random() * 200 + 175;
                 skierAnimate[i].color = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
             }
-            skierAnimate[i].x += 1.75;
-            skierAnimate[i].y += 0.75;
-            skifahrer(skierAnimate[i].x, skierAnimate[i].y, skierAnimate[i].color);
+            skifahrer(skierAnimate[i]);
         }
         for (let i = 0; i < snowAnimate.length; i++) {
             if (snowAnimate[i].y >= 600) {
-                snowAnimate[i].y = 0;
+                snowAnimate[i].y = Math.random() * 200 + 175;
             }
-            snowAnimate[i].y += 1; // andere Bewegungsmuster zu finden
-            drawSnow(snowAnimate[i].x, snowAnimate[i].y);
+            drawSnow(snowAnimate[i]);
         }
         for (let i = 0; i < cloudX.length; i++) {
             if (cloudX[i] >= 800) {
