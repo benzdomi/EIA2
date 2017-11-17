@@ -197,7 +197,7 @@ namespace Aufgabe4 {
         
             for (let i: number = 0; i < snowAnimate.length; i++) {
              if(snowAnimate[i].y >= 600){
-                snowAnimate[i].y = Math.random() * 200 + 175;
+                snowAnimate[i].y = 0;
                 }
           
             drawSnow(snowAnimate[i]);

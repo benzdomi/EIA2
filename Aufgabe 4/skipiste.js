@@ -149,7 +149,7 @@ var Aufgabe4;
         }
         for (let i = 0; i < snowAnimate.length; i++) {
             if (snowAnimate[i].y >= 600) {
-                snowAnimate[i].y = Math.random() * 200 + 175;
+                snowAnimate[i].y = 0;
             }
             drawSnow(snowAnimate[i]);
         }
