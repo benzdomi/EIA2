@@ -34,7 +34,7 @@ var Aufgabe7;
         for (let i = 0; i < splitString.length; i++) {
             splitString[i] = splitString[i].replace(/\ /, "");
         }
-        if (parseInt(splitString[0]) == NaN) {
+        if (Number.isNaN(parseInt(splitString[0]))) {
             return "Matrikelnummer ist keine Nummer...";
         }
         else if (splitString[1] == "") {
@@ -43,7 +43,7 @@ var Aufgabe7;
         else if (splitString[2] == "") {
             return "Vorname muss ein Wort sein...";
         }
-        else if (parseInt(splitString[3]) == NaN) {
+        else if (Number.isNaN(parseInt(splitString[3]))) {
             return "Alter ist keine Nummer...";
         }
         else if (parseInt(splitString[4]) != 0 && parseInt(splitString[4]) != 1) {
@@ -62,11 +62,27 @@ var Aufgabe7;
                 geschlecht: parseInt(splitString[4]) == 1,
                 kommentar: splitString[5]
             };
+            students.push(student);
             return "Data saved.";
         }
     }
     function queryData(_matrikel) {
-        return "Hier fehlt noch der richtige Code...";
+        for (let i = 0; i < students.length; i++) {
+            if (students[i].matrikelnummer == _matrikel) {
+                let matrikelOut = "Matrikelnummer: " + students[i].matrikelnummer;
+                let nameOut = "Name: " + students[i].name;
+                let vornameOut = "Vorname: " + students[i].vorname;
+                let alterOut = "Alter: " + students[i].alter;
+                let geschlechtOut = "Geschlecht: ";
+                if (students[i].geschlecht) {
+                    geschlechtOut += "m�nnlich";
+                }
+                else
+                    geschlechtOut += "weiblich";
+                let kommentarOut = "Kommentar: " + students[i].kommentar;
+                return matrikelOut + nameOut + vornameOut + alterOut + geschlechtOut + kommentarOut;
+            }
+        }
     }
 })(Aufgabe7 || (Aufgabe7 = {}));
 //# sourceMappingURL=studivz.js.map
