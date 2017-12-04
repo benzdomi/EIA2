@@ -84,10 +84,10 @@ namespace Aufgabe7 {
                 let alterOut: string = "Alter: " + students[i].alter;
                 let geschlechtOut: string = "Geschlecht: ";
                 if (students[i].geschlecht) {
-                    geschlechtOut += "m‰nnlich";
+                    geschlechtOut += "m√§nnlich";
                     } else geschlechtOut += "weiblich";
                 let kommentarOut: string = "Kommentar: " + students[i].kommentar;
-        return matrikelOut + nameOut + vornameOut + alterOut + geschlechtOut + kommentarOut;
+        return matrikelOut + "\n" + nameOut + "\n" + vornameOut + "\n" + alterOut + "\n" + geschlechtOut + "\n" + kommentarOut;
     }
             }
         }
