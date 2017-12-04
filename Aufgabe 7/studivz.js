@@ -80,7 +80,7 @@ var Aufgabe7;
                 else
                     geschlechtOut += "weiblich";
                 let kommentarOut = "Kommentar: " + students[i].kommentar;
-                return matrikelOut + nameOut + vornameOut + alterOut + geschlechtOut + kommentarOut;
+                return matrikelOut + "\n" + nameOut + "\n" + vornameOut + "\n" + alterOut + "\n" + geschlechtOut + "\n" + kommentarOut;
             }
         }
     }
