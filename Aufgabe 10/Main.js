@@ -3,6 +3,13 @@ var Aufgabe10;
     window.addEventListener("load", init);
     let baumtyp = document.createElement("select");
     let halterung = document.createElement("select");
+    let lieferopttyp = document.createElement("select");
+    let persName = document.createElement("input");
+    let persNachname = document.createElement("input");
+    let persMail = document.createElement("input");
+    let persAdresse = document.createElement("input");
+    let persPlz = document.createElement("input");
+    let prufen = document.createElement("div");
     //Warenkorb
     let wKorb = document.createElement("div");
     let h2 = document.createElement("h2");
@@ -74,6 +81,47 @@ var Aufgabe10;
             });
             document.getElementById("kerzen").appendChild(kerzenanz);
         }
+        //Lieferoptionen
+        lieferopttyp.addEventListener("change", input);
+        document.getElementById("lieferoption").appendChild(lieferopttyp);
+        for (let i = 0; i < Aufgabe10.lieferOptionen.length; i++) {
+            let option = document.createElement("option");
+            option.innerText = Aufgabe10.lieferOptionen[i].name;
+            lieferopttyp.id = Aufgabe10.lieferOptionen[i].kategorie;
+            lieferopttyp.appendChild(option);
+        }
+        //Daten
+        persName.type = "text";
+        persName.placeholder = "Name";
+        persName.required = true;
+        persName.style.marginRight = "1em";
+        document.getElementById("persdaten").appendChild(persName);
+        persNachname.type = "text";
+        persNachname.placeholder = "Nachname";
+        persNachname.required = true;
+        persNachname.style.marginRight = "1em";
+        document.getElementById("persdaten").appendChild(persNachname);
+        persMail.type = "email";
+        persMail.placeholder = "Email";
+        persMail.required = true;
+        persMail.style.marginRight = "1em";
+        document.getElementById("persdaten").appendChild(persMail);
+        persAdresse.type = "text";
+        persAdresse.placeholder = "Adresse";
+        persAdresse.required = true;
+        persAdresse.style.marginRight = "1em";
+        document.getElementById("persdaten").appendChild(persAdresse);
+        persPlz.type = "text";
+        persPlz.placeholder = "PLZ";
+        persPlz.pattern = "[0-9]{5}";
+        persPlz.required = true;
+        document.getElementById("persdaten").appendChild(persPlz);
+        //Button
+        let button = document.createElement("button");
+        button.innerText = "Bestellung Prüfen";
+        button.addEventListener("click", PrufeDaten);
+        button.style.marginTop = "10px";
+        document.getElementById("prufenbutton").appendChild(button);
     }
     function kugelInput(chkElement, anzahl) {
         for (let i = 0; i < Aufgabe10.kugelDaten.length; i++) {
@@ -104,10 +152,10 @@ var Aufgabe10;
         else {
             inDenWarenkorb(Aufgabe10.halterungen, halterungName, false);
         }
-        //        var lieferant: string = lieferopttyp.value;
-        //        if (lieferant != "") {
-        //            inDenWarenkorb(lieferoptionen, true, lieferant);
-        //        }
+        var lieferant = lieferopttyp.value;
+        if (lieferant != "") {
+            inDenWarenkorb(Aufgabe10.lieferOptionen, lieferant, true);
+        }
     }
     function inDenWarenkorb(daten, elementname, selected) {
         for (let i = 0; i < daten.length; i++) {
@@ -137,9 +185,9 @@ var Aufgabe10;
         //Schleife schaut ob p schon vorhanden ist 
         for (let i = 0; i < wKorb.getElementsByTagName("p").length; i++) {
             if (wKorb.getElementsByTagName("p")[i].id == _kategorie) {
-                var innerPreis = wKorb.getElementsByTagName("p")[i].innerText.split(":")[1];
+                var innerPreis = wKorb.getElementsByTagName("p")[i].innerText.split(": ")[1];
                 wKorb.getElementsByTagName("p")[i].remove();
-                gesamtpreis = gesamtpreis - parseInt(innerPreis);
+                gesamtpreis = gesamtpreis - parseInt(innerPreis.substring(0, innerPreis.length - 1));
             }
             //Gesamtpreis p entfernen um später aktualisiert zurück einzufügen
             if (wKorb.getElementsByTagName("p")[i].id == "gesamtpreis") {
@@ -160,7 +208,7 @@ var Aufgabe10;
             p.innerText += ":  " + preisObjekte + "€";
             wKorb.appendChild(p);
         }
-        gesamtpreis += _preis;
+        gesamtpreis += preisObjekte;
         var pGesamt = document.createElement("p");
         pGesamt.id = "gesamtpreis";
         pGesamt.innerText = "Gesamtpreis: " + gesamtpreis + "€";
@@ -169,6 +217,19 @@ var Aufgabe10;
         pGesamt.style.paddingTop = "10px";
         pGesamt.style.borderTop = "1px solid black";
         wKorb.appendChild(pGesamt);
+    }
+    function PrufeDaten() {
+        prufen.innerText = "";
+        if (persName.checkValidity() == false || persNachname.checkValidity() == false || persMail.checkValidity() == false || persPlz.checkValidity() == false || persAdresse.checkValidity() == false) {
+            prufen.innerText = "Deine Eingabe war leider fehlerhaft! Überprüfe sie noch einmal.";
+            prufen.style.color = "red";
+            document.body.appendChild(prufen);
+        }
+        else {
+            prufen.innerText = "Deine Bestellung wurde erfolgreich verifiziert!";
+            prufen.style.color = "green";
+            document.body.appendChild(prufen);
+        }
     }
 })(Aufgabe10 || (Aufgabe10 = {}));
 //# sourceMappingURL=Main.js.map

@@ -5,8 +5,15 @@ namespace Aufgabe10{
     
     let baumtyp: HTMLSelectElement = document.createElement("select");
     let halterung: HTMLSelectElement = document.createElement("select");
+    let lieferopttyp: HTMLSelectElement = document.createElement("select");
     
+    let persName: HTMLInputElement = document.createElement("input");
+    let persNachname: HTMLInputElement = document.createElement("input");
+    let persMail: HTMLInputElement = document.createElement("input");
+    let persAdresse: HTMLInputElement = document.createElement("input");
+    let persPlz: HTMLInputElement = document.createElement("input");
     
+    let prufen: HTMLDivElement = document.createElement("div");
     
     //Warenkorb
     let wKorb: HTMLDivElement = document.createElement("div");
@@ -101,6 +108,60 @@ namespace Aufgabe10{
             document.getElementById("kerzen").appendChild(kerzenanz);
         }
         
+        
+        //Lieferoptionen
+        lieferopttyp.addEventListener("change", input);
+        document.getElementById("lieferoption").appendChild(lieferopttyp);
+
+        for (let i: number = 0; i < lieferOptionen.length; i++) {
+            let option: HTMLOptionElement = document.createElement("option");
+            option.innerText = lieferOptionen[i].name;
+            lieferopttyp.id = lieferOptionen[i].kategorie;
+            lieferopttyp.appendChild(option);
+        }
+        
+        //Daten
+        persName.type = "text";
+        persName.placeholder = "Name";
+        persName.required = true;
+        persName.style.marginRight = "1em";
+        document.getElementById("persdaten").appendChild(persName);
+
+
+        persNachname.type = "text";
+        persNachname.placeholder = "Nachname";
+        persNachname.required = true;
+        persNachname.style.marginRight = "1em";
+        document.getElementById("persdaten").appendChild(persNachname);
+
+
+        persMail.type = "email";
+        persMail.placeholder = "Email";
+        persMail.required = true;
+        persMail.style.marginRight = "1em";
+        document.getElementById("persdaten").appendChild(persMail);
+
+
+        persAdresse.type = "text";
+        persAdresse.placeholder = "Adresse";
+        persAdresse.required = true;
+        persAdresse.style.marginRight = "1em";
+        document.getElementById("persdaten").appendChild(persAdresse);
+
+
+        persPlz.type = "text";
+        persPlz.placeholder = "PLZ";
+        persPlz.pattern = "[0-9]{5}";
+        persPlz.required = true;
+        document.getElementById("persdaten").appendChild(persPlz);
+        
+        //Button
+        let button: HTMLButtonElement = document.createElement("button");
+        button.innerText = "Bestellung Prüfen";
+        button.addEventListener("click", PrufeDaten);
+        button.style.marginTop = "10px";
+        document.getElementById("prufenbutton").appendChild(button);
+        
         }
     
     
@@ -147,10 +208,10 @@ namespace Aufgabe10{
 
 
 
-//        var lieferant: string = lieferopttyp.value;
-//        if (lieferant != "") {
-//            inDenWarenkorb(lieferoptionen, true, lieferant);
-//        }
+        var lieferant: string = lieferopttyp.value;
+        if (lieferant != "") {
+            inDenWarenkorb(lieferOptionen, lieferant, true);
+        }
         }
    
     
@@ -159,6 +220,7 @@ namespace Aufgabe10{
         for (let i: number = 0; i < daten.length; i++) {
             if (daten[i].name == elementname) {
                 Warenkorb(daten[i].kategorie, elementname, daten[i].preis, 1, selected);
+
                 
             }
         }
@@ -193,9 +255,11 @@ namespace Aufgabe10{
         //Schleife schaut ob p schon vorhanden ist 
         for (let i: number = 0; i < wKorb.getElementsByTagName("p").length; i++) { 
             if (wKorb.getElementsByTagName("p")[i].id == _kategorie) {
-                var innerPreis: string = wKorb.getElementsByTagName("p")[i].innerText.split(":")[1]; 
+                var innerPreis: string = wKorb.getElementsByTagName("p")[i].innerText.split(": ")[1]; 
                 wKorb.getElementsByTagName("p")[i].remove(); 
-                gesamtpreis = gesamtpreis - parseInt(innerPreis);
+                gesamtpreis = gesamtpreis - parseInt(innerPreis.substring(0, innerPreis.length-1));
+                
+                
             }
             
             //Gesamtpreis p entfernen um später aktualisiert zurück einzufügen
@@ -205,8 +269,9 @@ namespace Aufgabe10{
         }
       
         
-        var preisObjekte: number = _anzahl * _preis;
         
+        var preisObjekte: number = _anzahl * _preis;
+      
         if(_selected){
             var p: HTMLParagraphElement = document.createElement("p");
             p.id = _kategorie;
@@ -219,8 +284,11 @@ namespace Aufgabe10{
             
             wKorb.appendChild(p);
             }
+       
         
-        gesamtpreis += _preis;
+        
+        
+        gesamtpreis += preisObjekte;
         var pGesamt: HTMLParagraphElement = document.createElement("p");
         pGesamt.id = "gesamtpreis";
         pGesamt.innerText = "Gesamtpreis: " + gesamtpreis + "€";
@@ -230,6 +298,23 @@ namespace Aufgabe10{
         pGesamt.style.borderTop = "1px solid black";
         wKorb.appendChild(pGesamt);
         
+        
+        
         }
+    
+    function PrufeDaten(): void {
+
+        prufen.innerText = "";
+        if (persName.checkValidity() == false || persNachname.checkValidity() == false || persMail.checkValidity() == false || persPlz.checkValidity() == false || persAdresse.checkValidity() == false) {
+            prufen.innerText = "Deine Eingabe war leider fehlerhaft! Überprüfe sie noch einmal.";
+            prufen.style.color = "red";
+            document.body.appendChild(prufen);
+        }
+        else {
+            prufen.innerText = "Deine Bestellung wurde erfolgreich verifiziert!";
+            prufen.style.color = "green";
+            document.body.appendChild(prufen);
+        }
+    }
     
     }
