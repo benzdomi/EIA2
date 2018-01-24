@@ -27,7 +27,7 @@ namespace DatabaseClient {
     function sendRequest(_query: string, _callback: EventListener): void {
         let xhr: XMLHttpRequest = new XMLHttpRequest();
         //xhr.open("GET", "http://localhost:8100?" + _query, true);
-        xhr.open("GET", "https://eia2-w17-databasetest.herokuapp.com/?" + _query, true);
+        xhr.open("GET", "https://benzdomi-database.herokuapp.com/?" + _query, true);
         xhr.addEventListener("readystatechange", _callback);
         xhr.send();
     }
