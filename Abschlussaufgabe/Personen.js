@@ -1,8 +1,8 @@
 var Abschlussarbeit;
 (function (Abschlussarbeit) {
     class Personen extends Abschlussarbeit.Elemente {
-        constructor(_x, _y, _color, _bool, _mimik) {
-            super(_x, _y, _color, _bool, _mimik);
+        constructor(_x, _y, _color, _bool, _mimik, _drawBool) {
+            super(_x, _y, _color, _bool, _mimik, _drawBool);
         }
         update() {
             this.draw();
@@ -89,6 +89,7 @@ var Abschlussarbeit;
                 hitbox.style.width = "2.9vw";
                 hitbox.style.height = "2.9vw";
                 hitbox.style.position = "absolute";
+                hitbox.style.zIndex = "50";
                 hitbox.style.left = ((this.x - 28) / 1950) * 100 + "vw";
                 hitbox.style.top = ((this.y - 28) / 1950) * 100 + "vw";
                 hitbox.addEventListener("click", function () { Abschlussarbeit.daneben(_i); });
@@ -96,48 +97,62 @@ var Abschlussarbeit;
             }
         }
         draw() {
-            Abschlussarbeit.crc2.beginPath();
-            Abschlussarbeit.crc2.arc(this.x, this.y, 28, 0, 2 * Math.PI);
-            Abschlussarbeit.crc2.fillStyle = "#f7b284";
-            Abschlussarbeit.crc2.fill();
-            Abschlussarbeit.crc2.beginPath();
-            Abschlussarbeit.crc2.arc(this.x, this.y + 63, 35, Math.PI, 0);
-            Abschlussarbeit.crc2.fillStyle = this.color;
-            Abschlussarbeit.crc2.fill();
-            Abschlussarbeit.crc2.fillRect(this.x - 35, this.y + 63, 70, 60);
-            if (this.bool == false) {
-                Abschlussarbeit.crc2.fillStyle = "#000000";
-                Abschlussarbeit.crc2.fillRect(this.x - 35, this.y + 123, 70, 35);
-                Abschlussarbeit.crc2.fillRect(this.x - 35, this.y + 158, 28, 30);
-                Abschlussarbeit.crc2.fillRect(this.x + 7, this.y + 158, 28, 30);
+            if (this.drawBool) {
+                Abschlussarbeit.crc2.beginPath();
+                Abschlussarbeit.crc2.arc(this.x, this.y, 28, 0, 2 * Math.PI);
                 Abschlussarbeit.crc2.fillStyle = "#f7b284";
-                Abschlussarbeit.crc2.fillRect(this.x - 30, this.y + 188, 20, 25);
-                Abschlussarbeit.crc2.fillRect(this.x + 11, this.y + 188, 20, 25);
-                Abschlussarbeit.crc2.fillStyle = "#e30613";
-                Abschlussarbeit.crc2.fillRect(this.x - 30, this.y + 213, 20, 60);
-                Abschlussarbeit.crc2.fillRect(this.x + 11, this.y + 213, 20, 60);
-                Abschlussarbeit.crc2.beginPath();
-                Abschlussarbeit.crc2.fillStyle = "#000000";
-                Abschlussarbeit.crc2.arc(this.x - 20, this.y + 273, 13, 0, 2 * Math.PI);
                 Abschlussarbeit.crc2.fill();
                 Abschlussarbeit.crc2.beginPath();
-                Abschlussarbeit.crc2.arc(this.x + 20, this.y + 273, 13, 0, 2 * Math.PI);
+                Abschlussarbeit.crc2.arc(this.x, this.y + 63, 35, Math.PI, 0);
+                Abschlussarbeit.crc2.fillStyle = this.color;
                 Abschlussarbeit.crc2.fill();
-                if (Abschlussarbeit.armeOben) {
-                    Abschlussarbeit.crc2.fillStyle = this.color;
+                Abschlussarbeit.crc2.fillRect(this.x - 35, this.y + 63, 70, 60);
+                if (this.bool == false) {
+                    Abschlussarbeit.crc2.fillStyle = "#000000";
+                    Abschlussarbeit.crc2.fillRect(this.x - 35, this.y + 123, 70, 35);
+                    Abschlussarbeit.crc2.fillRect(this.x - 35, this.y + 158, 28, 30);
+                    Abschlussarbeit.crc2.fillRect(this.x + 7, this.y + 158, 28, 30);
+                    Abschlussarbeit.crc2.fillStyle = "#f7b284";
+                    Abschlussarbeit.crc2.fillRect(this.x - 30, this.y + 188, 20, 25);
+                    Abschlussarbeit.crc2.fillRect(this.x + 11, this.y + 188, 20, 25);
+                    Abschlussarbeit.crc2.fillStyle = "#e30613";
+                    Abschlussarbeit.crc2.fillRect(this.x - 30, this.y + 213, 20, 60);
+                    Abschlussarbeit.crc2.fillRect(this.x + 11, this.y + 213, 20, 60);
                     Abschlussarbeit.crc2.beginPath();
-                    Abschlussarbeit.crc2.arc(this.x - 35, this.y + 43, 11, 0, Math.PI);
-                    Abschlussarbeit.crc2.lineTo(this.x - 46, this.y - 45);
-                    Abschlussarbeit.crc2.arc(this.x - 35, this.y - 45, 11, Math.PI, 0);
+                    Abschlussarbeit.crc2.fillStyle = "#000000";
+                    Abschlussarbeit.crc2.arc(this.x - 20, this.y + 273, 13, 0, 2 * Math.PI);
                     Abschlussarbeit.crc2.fill();
                     Abschlussarbeit.crc2.beginPath();
-                    Abschlussarbeit.crc2.arc(this.x + 35, this.y + 43, 11, 0, Math.PI);
-                    Abschlussarbeit.crc2.lineTo(this.x + 24, this.y - 45);
-                    Abschlussarbeit.crc2.arc(this.x + 35, this.y - 45, 11, Math.PI, 0);
+                    Abschlussarbeit.crc2.arc(this.x + 20, this.y + 273, 13, 0, 2 * Math.PI);
                     Abschlussarbeit.crc2.fill();
+                    if (Abschlussarbeit.armeOben) {
+                        Abschlussarbeit.crc2.fillStyle = this.color;
+                        Abschlussarbeit.crc2.beginPath();
+                        Abschlussarbeit.crc2.arc(this.x - 35, this.y + 43, 11, 0, Math.PI);
+                        Abschlussarbeit.crc2.lineTo(this.x - 46, this.y - 45);
+                        Abschlussarbeit.crc2.arc(this.x - 35, this.y - 45, 11, Math.PI, 0);
+                        Abschlussarbeit.crc2.fill();
+                        Abschlussarbeit.crc2.beginPath();
+                        Abschlussarbeit.crc2.arc(this.x + 35, this.y + 43, 11, 0, Math.PI);
+                        Abschlussarbeit.crc2.lineTo(this.x + 24, this.y - 45);
+                        Abschlussarbeit.crc2.arc(this.x + 35, this.y - 45, 11, Math.PI, 0);
+                        Abschlussarbeit.crc2.fill();
+                    }
+                    else {
+                        Abschlussarbeit.crc2.fillStyle = this.color;
+                        Abschlussarbeit.crc2.beginPath();
+                        Abschlussarbeit.crc2.arc(this.x - 35, this.y + 43, 12, Math.PI, 0.25 * Math.PI);
+                        Abschlussarbeit.crc2.lineTo(this.x - 45, this.y + 100);
+                        Abschlussarbeit.crc2.arc(this.x - 60, this.y + 113, 12, 0, 1.25 * Math.PI);
+                        Abschlussarbeit.crc2.fill();
+                        Abschlussarbeit.crc2.beginPath();
+                        Abschlussarbeit.crc2.arc(this.x + 35, this.y + 43, 12, 0.75 * Math.PI, 0);
+                        Abschlussarbeit.crc2.lineTo(this.x + 65, this.y + 100);
+                        Abschlussarbeit.crc2.arc(this.x + 60, this.y + 113, 12, 1.75 * Math.PI, Math.PI);
+                        Abschlussarbeit.crc2.fill();
+                    }
                 }
                 else {
-                    Abschlussarbeit.crc2.fillStyle = this.color;
                     Abschlussarbeit.crc2.beginPath();
                     Abschlussarbeit.crc2.arc(this.x - 35, this.y + 43, 12, Math.PI, 0.25 * Math.PI);
                     Abschlussarbeit.crc2.lineTo(this.x - 45, this.y + 100);
@@ -149,46 +164,34 @@ var Abschlussarbeit;
                     Abschlussarbeit.crc2.arc(this.x + 60, this.y + 113, 12, 1.75 * Math.PI, Math.PI);
                     Abschlussarbeit.crc2.fill();
                 }
-            }
-            else {
                 Abschlussarbeit.crc2.beginPath();
-                Abschlussarbeit.crc2.arc(this.x - 35, this.y + 43, 12, Math.PI, 0.25 * Math.PI);
-                Abschlussarbeit.crc2.lineTo(this.x - 45, this.y + 100);
-                Abschlussarbeit.crc2.arc(this.x - 60, this.y + 113, 12, 0, 1.25 * Math.PI);
+                Abschlussarbeit.crc2.arc(this.x - 10, this.y - 5, 5, 0, 2 * Math.PI);
+                Abschlussarbeit.crc2.fillStyle = "#000000";
                 Abschlussarbeit.crc2.fill();
                 Abschlussarbeit.crc2.beginPath();
-                Abschlussarbeit.crc2.arc(this.x + 35, this.y + 43, 12, 0.75 * Math.PI, 0);
-                Abschlussarbeit.crc2.lineTo(this.x + 65, this.y + 100);
-                Abschlussarbeit.crc2.arc(this.x + 60, this.y + 113, 12, 1.75 * Math.PI, Math.PI);
+                Abschlussarbeit.crc2.arc(this.x + 10, this.y - 5, 5, 0, 2 * Math.PI);
                 Abschlussarbeit.crc2.fill();
-            }
-            Abschlussarbeit.crc2.beginPath();
-            Abschlussarbeit.crc2.arc(this.x - 10, this.y - 5, 5, 0, 2 * Math.PI);
-            Abschlussarbeit.crc2.fillStyle = "#000000";
-            Abschlussarbeit.crc2.fill();
-            Abschlussarbeit.crc2.beginPath();
-            Abschlussarbeit.crc2.arc(this.x + 10, this.y - 5, 5, 0, 2 * Math.PI);
-            Abschlussarbeit.crc2.fill();
-            if (this.mimik == "normal") {
-                Abschlussarbeit.crc2.fillRect(this.x - 10, this.y + 10, 20, 3);
-            }
-            if (this.mimik == "unhappy") {
-                Abschlussarbeit.crc2.beginPath();
-                Abschlussarbeit.crc2.arc(this.x, this.y + 18, 15, Math.PI, 0);
-                Abschlussarbeit.crc2.fill();
-                Abschlussarbeit.crc2.beginPath();
-                Abschlussarbeit.crc2.arc(this.x, this.y + 18, 12, Math.PI, 0);
-                Abschlussarbeit.crc2.fillStyle = "#f7b284";
-                Abschlussarbeit.crc2.fill();
-            }
-            if (this.mimik == "happy") {
-                Abschlussarbeit.crc2.beginPath();
-                Abschlussarbeit.crc2.arc(this.x, this.y + 8, 15, 0, Math.PI);
-                Abschlussarbeit.crc2.fill();
-                Abschlussarbeit.crc2.beginPath();
-                Abschlussarbeit.crc2.arc(this.x, this.y + 8, 12, 0, Math.PI);
-                Abschlussarbeit.crc2.fillStyle = "#f7b284";
-                Abschlussarbeit.crc2.fill();
+                if (this.mimik == "normal") {
+                    Abschlussarbeit.crc2.fillRect(this.x - 10, this.y + 10, 20, 3);
+                }
+                if (this.mimik == "unhappy") {
+                    Abschlussarbeit.crc2.beginPath();
+                    Abschlussarbeit.crc2.arc(this.x, this.y + 18, 15, Math.PI, 0);
+                    Abschlussarbeit.crc2.fill();
+                    Abschlussarbeit.crc2.beginPath();
+                    Abschlussarbeit.crc2.arc(this.x, this.y + 18, 12, Math.PI, 0);
+                    Abschlussarbeit.crc2.fillStyle = "#f7b284";
+                    Abschlussarbeit.crc2.fill();
+                }
+                if (this.mimik == "happy") {
+                    Abschlussarbeit.crc2.beginPath();
+                    Abschlussarbeit.crc2.arc(this.x, this.y + 8, 15, 0, Math.PI);
+                    Abschlussarbeit.crc2.fill();
+                    Abschlussarbeit.crc2.beginPath();
+                    Abschlussarbeit.crc2.arc(this.x, this.y + 8, 12, 0, Math.PI);
+                    Abschlussarbeit.crc2.fillStyle = "#f7b284";
+                    Abschlussarbeit.crc2.fill();
+                }
             }
         }
     }

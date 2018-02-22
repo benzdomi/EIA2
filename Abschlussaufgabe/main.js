@@ -10,7 +10,6 @@ nicht kopiert und auch nicht diktiert.
 var Abschlussarbeit;
 (function (Abschlussarbeit) {
     let SuperClass = [];
-    //let superClass: MovingShape[] = [];
     var canvas;
     var image;
     Abschlussarbeit.scorePC = 0;
@@ -64,27 +63,35 @@ var Abschlussarbeit;
             div.addEventListener("click", function () { tor(k + 1); });
             document.body.appendChild(div);
         }
-        for (i = 0; i < 2; i++) {
+        for (i = 0; i < 3; i++) {
             let div = document.createElement("div");
-            div.style.height = "16.5vw";
             div.style.position = "absolute";
-            div.style.zIndex = "100";
+            div.style.zIndex = "1";
             if (i == 0) {
-                div.style.width = "17.3vw";
+                div.style.height = "20.4vw";
+                div.style.width = "18.4vw";
                 div.style.left = "0";
+                div.style.top = "8.4vw";
+            }
+            else if (i == 1) {
+                div.style.height = "20.4vw";
+                div.style.width = "20.3vw";
+                div.style.right = "0";
+                div.style.top = "8.4vw";
             }
             else {
-                div.style.width = "19.1vw";
-                div.style.right = "0";
+                div.style.height = "8.4vw";
+                div.style.width = "100%";
+                div.style.left = "0";
+                div.style.top = "0";
             }
-            div.style.top = "12.3vw";
             div.addEventListener("click", keinTreffer);
             document.body.appendChild(div);
         }
         //Torwart
-        let torwart = new Abschlussarbeit.Personen(975, 275, "#e30613", false, "normal");
+        let torwart = new Abschlussarbeit.Personen(975, 275, "#e30613", false, "normal", true);
         SuperClass.push(torwart);
-        let ball = new Abschlussarbeit.Ball(975, 838, "#ffffff", false, "");
+        let ball = new Abschlussarbeit.Ball(975, 838, "#ffffff", false, "", true);
         SuperClass.push(ball);
         Abschlussarbeit.name = prompt("Wie heißt du?");
         scoreBoard(Abschlussarbeit.name);
@@ -104,11 +111,25 @@ var Abschlussarbeit;
         Abschlussarbeit.specY = SuperClass[_i].y;
         Abschlussarbeit.aus = true;
         Abschlussarbeit.scorePC += 1;
-        setTimeout(function () {
-            SuperClass[_i].mimik = "unhappy";
-            document.getElementById("score").innerText = Abschlussarbeit.name + " " + Abschlussarbeit.scorePlayer + ":" + Abschlussarbeit.scorePC + " PC";
-            alert("Autsch! So verscheuchst du deine Fans.");
-        }, 2500);
+        if (SuperClass[_i].drawBool) {
+            if (SuperClass[_i].mimik == "unhappy") {
+                setTimeout(function () {
+                    document.getElementById("score").innerText = Abschlussarbeit.name + " " + Abschlussarbeit.scorePlayer + ":" + Abschlussarbeit.scorePC + " PC";
+                    SuperClass[_i].drawBool = false;
+                    alert("Jetzt hast du ein Fan weniger...");
+                }, 2500);
+            }
+            else {
+                setTimeout(function () {
+                    SuperClass[_i].mimik = "unhappy";
+                    document.getElementById("score").innerText = Abschlussarbeit.name + " " + Abschlussarbeit.scorePlayer + ":" + Abschlussarbeit.scorePC + " PC";
+                    alert("Autsch! So verscheuchst du deine Fans.");
+                }, 2500);
+            }
+        }
+        else {
+            setTimeout(function () { document.getElementById("score").innerText = Abschlussarbeit.name + " " + Abschlussarbeit.scorePlayer + ":" + Abschlussarbeit.scorePC + " PC"; }, 2500);
+        }
     }
     Abschlussarbeit.daneben = daneben;
     Abschlussarbeit.pos = false;
@@ -135,8 +156,10 @@ var Abschlussarbeit;
     }
     function keinTreffer(_event) {
         Abschlussarbeit.specX = _event.pageX * (1950 / window.innerWidth);
-        Abschlussarbeit.specY = _event.pageY * (838 / window.innerHeight);
+        Abschlussarbeit.specY = _event.pageY * (1950 / window.innerWidth);
         Abschlussarbeit.aus = true;
+        Abschlussarbeit.scorePC += 1;
+        setTimeout(function () { document.getElementById("score").innerText = Abschlussarbeit.name + " " + Abschlussarbeit.scorePlayer + ":" + Abschlussarbeit.scorePC + " PC"; }, 2500);
     }
     function scoreBoard(_name) {
         if (_name == "") {
@@ -173,40 +196,40 @@ var Abschlussarbeit;
             for (i = 0; i < parseInt(_zuschauer) / 4; i++) {
                 let c;
                 if (i % 2 == 0) {
-                    c = new Abschlussarbeit.Personen((990 + i * 30) + Math.random() * 50, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                    c = new Abschlussarbeit.Personen((990 + i * 30) + Math.random() * 50, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
                 else {
-                    c = new Abschlussarbeit.Personen((960 - i * 30) + Math.random() * 50, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                    c = new Abschlussarbeit.Personen((960 - i * 30) + Math.random() * 50, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
                 SuperClass.push(c);
             }
             for (i = 0; i < parseInt(_zuschauer) / 4; i++) {
                 let c;
                 if (i % 2 == 0) {
-                    c = new Abschlussarbeit.Personen((990 + i * 30) + Math.random() * 50, 80, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                    c = new Abschlussarbeit.Personen((990 + i * 30) + Math.random() * 50, 80, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
                 else {
-                    c = new Abschlussarbeit.Personen((960 - i * 30) + Math.random() * 50, 80, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                    c = new Abschlussarbeit.Personen((960 - i * 30) + Math.random() * 50, 80, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
                 SuperClass.push(c);
             }
             for (i = 0; i < parseInt(_zuschauer) / 4; i++) {
                 let c;
                 if (i % 2 == 0) {
-                    c = new Abschlussarbeit.Personen((990 + i * 30) + Math.random() * 50, 130, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                    c = new Abschlussarbeit.Personen((990 + i * 30) + Math.random() * 50, 130, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
                 else {
-                    c = new Abschlussarbeit.Personen((960 - i * 30) + Math.random() * 50, 130, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                    c = new Abschlussarbeit.Personen((960 - i * 30) + Math.random() * 50, 130, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
                 SuperClass.push(c);
             }
             for (i = 0; i < parseInt(_zuschauer) / 4; i++) {
                 let c;
                 if (i % 2 == 0) {
-                    c = new Abschlussarbeit.Personen((990 + i * 30) + Math.random() * 50, 180, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                    c = new Abschlussarbeit.Personen((990 + i * 30) + Math.random() * 50, 180, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
                 else {
-                    c = new Abschlussarbeit.Personen((960 - i * 30) + Math.random() * 50, 180, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                    c = new Abschlussarbeit.Personen((960 - i * 30) + Math.random() * 50, 180, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
                 SuperClass.push(c);
             }
@@ -216,7 +239,7 @@ var Abschlussarbeit;
                 let c;
                 if (i % 2 == 0) {
                     let x = (990 + k * 30) + Math.random() * 50;
-                    c = new Abschlussarbeit.Personen(x, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", false, "happy");
+                    c = new Abschlussarbeit.Personen(x, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", false, "happy", true);
                     let div = document.createElement("div");
                     div.style.width = "2.9vw";
                     div.style.height = "2.9vw";
@@ -228,7 +251,7 @@ var Abschlussarbeit;
                 }
                 else {
                     let x = (960 - k * 30) + Math.random() * 50;
-                    c = new Abschlussarbeit.Personen(x, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", false, "happy");
+                    c = new Abschlussarbeit.Personen(x, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", false, "happy", true);
                     let div = document.createElement("div");
                     div.style.width = "2.9vw";
                     div.style.height = "2.9vw";

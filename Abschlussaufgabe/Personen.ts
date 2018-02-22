@@ -2,8 +2,8 @@ namespace Abschlussarbeit {
     export class Personen extends Elemente {
 
         
-        constructor(_x: number, _y: number, _color: string, _bool: boolean, _mimik: string){
-            super(_x, _y, _color, _bool, _mimik);
+        constructor(_x: number, _y: number, _color: string, _bool: boolean, _mimik: string, _drawBool:boolean){
+            super(_x, _y, _color, _bool, _mimik, _drawBool);
         }
         
 update(): void {
@@ -89,6 +89,7 @@ update(): void {
                 hitbox.style.width = "2.9vw";
         hitbox.style.height = "2.9vw";
         hitbox.style.position = "absolute";
+                hitbox.style.zIndex = "50";
                 hitbox.style.left = ((this.x-28)/1950)*100 + "vw";
                 hitbox.style.top = ((this.y-28)/1950)*100 + "vw";
                 hitbox.addEventListener("click", function(){daneben(_i);});
@@ -97,6 +98,7 @@ update(): void {
             }
         
         draw(): void {
+            if(this.drawBool){
         crc2.beginPath();
         crc2.arc(this.x, this.y, 28, 0, 2 * Math.PI);
         crc2.fillStyle = "#f7b284";
@@ -200,6 +202,7 @@ update(): void {
                 crc2.fillStyle = "#f7b284";
         crc2.fill();
                 }
+            }
             }
         }
     }

@@ -1,8 +1,8 @@
 var Abschlussarbeit;
 (function (Abschlussarbeit) {
     class Ball extends Abschlussarbeit.Elemente {
-        constructor(_x, _y, _color, _bool, _mimik) {
-            super(_x, _y, _color, _bool, _mimik);
+        constructor(_x, _y, _color, _bool, _mimik, _drawBool) {
+            super(_x, _y, _color, _bool, _mimik, _drawBool);
         }
         update() {
             this.draw();

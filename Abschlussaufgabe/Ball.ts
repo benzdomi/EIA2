@@ -2,8 +2,8 @@ namespace Abschlussarbeit {
     export class Ball extends Elemente {
 
         
-        constructor(_x: number, _y: number, _color: string, _bool: boolean, _mimik: string){
-            super(_x, _y, _color, _bool, _mimik);
+        constructor(_x: number, _y: number, _color: string, _bool: boolean, _mimik: string, _drawBool:boolean){
+            super(_x, _y, _color, _bool, _mimik, _drawBool);
         }
         
 update(): void {

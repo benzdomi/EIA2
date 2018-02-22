@@ -14,8 +14,7 @@ namespace Abschlussarbeit {
 
     
     let SuperClass: Elemente[] = [];
-    
-//let superClass: MovingShape[] = [];
+
 
     
     var canvas: HTMLCanvasElement;
@@ -93,29 +92,38 @@ namespace Abschlussarbeit {
             
             }
         
-        for(i= 0; i<2; i++){
+        for(i= 0; i<3; i++){
             let div: HTMLDivElement = document.createElement("div");
         
-        div.style.height = "16.5vw";
+        
         div.style.position = "absolute";
-            div.style.zIndex = "100";
+            div.style.zIndex = "1";
             if(i==0){
-                div.style.width = "17.3vw";
+                div.style.height = "20.4vw";
+                div.style.width = "18.4vw";
         div.style.left = "0";
-                }else{
-                div.style.width = "19.1vw";
+                div.style.top="8.4vw";
+                }else if(i==1){
+                div.style.height = "20.4vw";
+                div.style.width = "20.3vw";
                 div.style.right = "0";
+                div.style.top="8.4vw";
+                }else{
+                div.style.height = "8.4vw";
+                div.style.width = "100%";
+        div.style.left = "0";
+                div.style.top="0";
                 }
-            div.style.top="12.3vw";
+            
         div.addEventListener("click", keinTreffer);
         document.body.appendChild(div);
             }
         
         //Torwart
-        let torwart: Personen = new Personen(975, 275, "#e30613", false, "normal");
+        let torwart: Personen = new Personen(975, 275, "#e30613", false, "normal", true);
         SuperClass.push(torwart);
         
-        let ball: Ball = new Ball(975, 838, "#ffffff", false, "");
+        let ball: Ball = new Ball(975, 838, "#ffffff", false, "", true);
         SuperClass.push(ball);
         
         name= prompt("Wie heißt du?");
@@ -150,11 +158,20 @@ export function daneben(_i:number){
         specY = SuperClass[_i].y;
         aus = true;
         scorePC += 1;
-    
+        if(SuperClass[_i].drawBool){
+        if(SuperClass[_i].mimik == "unhappy"){
+            setTimeout(function(){
+            document.getElementById("score").innerText = name+ " " + scorePlayer + ":" + scorePC + " PC";
+            SuperClass[_i].drawBool = false;
+            alert("Jetzt hast du ein Fan weniger...");}, 2500);
+            }else{
         setTimeout(function(){SuperClass[_i].mimik = "unhappy";
         document.getElementById("score").innerText = name+ " " + scorePlayer + ":" + scorePC + " PC";
         alert("Autsch! So verscheuchst du deine Fans.");}, 2500);
-    
+            }
+    }else{
+          setTimeout(function() {document.getElementById("score").innerText = name+ " " + scorePlayer + ":" + scorePC + " PC";}, 2500);
+            }
         }
     
     export let r :number;
@@ -187,8 +204,10 @@ function tor(_pos:number){
     
     function keinTreffer(_event: MouseEvent) :void{
         specX = _event.pageX * (1950 / window.innerWidth);
-        specY = _event.pageY * (838 / window.innerHeight);
+        specY = _event.pageY * (1950 / window.innerWidth);
         aus = true;
+        scorePC +=1;
+        setTimeout(function() {document.getElementById("score").innerText = name+ " " + scorePlayer + ":" + scorePC + " PC";}, 2500);
         }
     
     function scoreBoard(_name:string) :void {
@@ -226,9 +245,9 @@ function tor(_pos:number){
         for ( i = 0; i < parseInt(_zuschauer) / 4; i++) {
             let c: Personen;
             if(i%2==0){     
-            c = new Personen((990 + i * 30)+Math.random() * 50, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+            c = new Personen((990 + i * 30)+Math.random() * 50, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }else{
-                c = new Personen((960 - i * 30)+Math.random() * 50, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                c = new Personen((960 - i * 30)+Math.random() * 50, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
             SuperClass.push(c);
         }
@@ -236,9 +255,9 @@ function tor(_pos:number){
         for ( i = 0; i < parseInt(_zuschauer) / 4; i++) {
             let c: Personen;
             if(i%2==0){
-            c = new Personen((990 + i * 30)+Math.random() * 50, 80, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+            c = new Personen((990 + i * 30)+Math.random() * 50, 80, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }else{
-                c = new Personen((960 - i * 30)+Math.random() * 50, 80, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                c = new Personen((960 - i * 30)+Math.random() * 50, 80, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
             SuperClass.push(c);
         }
@@ -246,9 +265,9 @@ function tor(_pos:number){
         for ( i = 0; i < parseInt(_zuschauer) / 4; i++) {
             let c: Personen;
             if(i%2==0){
-            c = new Personen((990 + i * 30)+Math.random() * 50, 130, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+            c = new Personen((990 + i * 30)+Math.random() * 50, 130, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }else{
-                c = new Personen((960 - i * 30)+Math.random() * 50, 130, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                c = new Personen((960 - i * 30)+Math.random() * 50, 130, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }
             SuperClass.push(c);
         }
@@ -256,9 +275,9 @@ function tor(_pos:number){
         for ( i = 0; i < parseInt(_zuschauer) / 4; i++) {
             let c: Personen;
             if(i%2==0){
-            c = new Personen((990 + i * 30)+Math.random() * 50, 180, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+            c = new Personen((990 + i * 30)+Math.random() * 50, 180, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 }else{
-                c = new Personen((960 - i * 30)+Math.random() * 50, 180, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy");
+                c = new Personen((960 - i * 30)+Math.random() * 50, 180, "hsl(" + Math.random() * 360 + ", 100%, 50%)", true, "happy", true);
                 
                 }
             SuperClass.push(c);
@@ -268,7 +287,7 @@ function tor(_pos:number){
             let c: Personen;
             if(i%2==0){
                 let x:number = (990 + k * 30)+Math.random() * 50;
-            c = new Personen(x, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", false, "happy");
+            c = new Personen(x, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", false, "happy", true);
                 let div: HTMLDivElement = document.createElement("div");
         div.style.width = "2.9vw";
         div.style.height = "2.9vw";
@@ -279,7 +298,7 @@ function tor(_pos:number){
         document.body.appendChild(div);
                 }else{
                 let x:number = (960 - k * 30)+Math.random() * 50;
-                c = new Personen(x, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", false, "happy");
+                c = new Personen(x, 30, "hsl(" + Math.random() * 360 + ", 100%, 50%)", false, "happy", true);
                 let div: HTMLDivElement = document.createElement("div");
                 div.style.width = "2.9vw";
         div.style.height = "2.9vw";
