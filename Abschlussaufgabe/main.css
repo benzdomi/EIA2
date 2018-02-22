@@ -1,0 +1,17 @@
+body{
+	background-color: #009933;	
+	padding:0;
+	margin:0;
+	overflow:hidden;
+}
+
+img{
+	position: absolute;
+	opacity: 0.5;
+	/* display:none; */
+}
+
+
+ canvas{
+	width:100%;
+}
